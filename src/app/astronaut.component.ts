@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
         Confirm
       </button>
     </p>
-  `
+  `,
 })
 export class AstronautComponent implements OnDestroy {
   @Input() astronaut = '';
@@ -26,11 +26,12 @@ export class AstronautComponent implements OnDestroy {
 
   constructor(private missionService: MissionService) {
     this.subscription = missionService.missionAnnounced$.subscribe(
-      mission => {
+      (mission) => {
         this.mission = mission;
         this.announced = true;
         this.confirmed = false;
-    });
+      }
+    );
   }
 
   confirm() {
@@ -40,10 +41,10 @@ export class AstronautComponent implements OnDestroy {
 
   ngOnDestroy() {
     // prevent memory leak when component destroyed
+    console.log('DESTROY!!');
     this.subscription.unsubscribe();
   }
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
